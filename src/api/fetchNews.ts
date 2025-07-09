@@ -1,17 +1,12 @@
-// export const fetchNews = async (language: string) => {
-  
-//   const response = await fetch(
-//     `https://newsapi.org/v2/top-headlines?language=${language}&pageSize=10&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
-//   );
-//   console.log(response)
-//   const data = await response.json();
-//   return data.articles;
-// };
 import type { NewsItem } from "../types/types";
 
-export const fetchTopHeadlines = async (language: string): Promise<NewsItem[]> => {
+export const fetchTopHeadlines = async (
+  language: string
+): Promise<NewsItem[]> => {
   const response = await fetch(
-    `https://newsapi.org/v2/top-headlines?language=${language}&pageSize=10&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
+    `https://newsapi.org/v2/top-headlines?language=${language}&pageSize=10&apiKey=${
+      import.meta.env.VITE_NEWS_API_KEY
+    }`
   );
   const data = await response.json();
   if (!data.articles || !Array.isArray(data.articles)) {
@@ -20,9 +15,14 @@ export const fetchTopHeadlines = async (language: string): Promise<NewsItem[]> =
   return data.articles;
 };
 
-export const searchNews = async (query: string, language: string): Promise<NewsItem[]> => {
+export const searchNews = async (
+  query: string,
+  language: string
+): Promise<NewsItem[]> => {
   const response = await fetch(
-    `https://newsapi.org/v2/everything?q=${query}&language=${language}&sortBy=popularity&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
+    `https://newsapi.org/v2/everything?q=${query}&language=${language}&sortBy=popularity&apiKey=${
+      import.meta.env.VITE_NEWS_API_KEY
+    }`
   );
   const data = await response.json();
   if (!data.articles || !Array.isArray(data.articles)) {

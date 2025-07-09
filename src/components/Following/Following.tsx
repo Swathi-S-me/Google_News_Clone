@@ -12,7 +12,7 @@ function Following() {
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">  Searches</h1>
+      <h1 className="text-3xl font-bold mb-6 text-gray-800"> Searches</h1>
 
       {savedSearches.length === 0 ? (
         <div className="text-gray-500 text-center text-lg py-8 bg-white rounded-lg shadow-inner">
@@ -27,7 +27,9 @@ function Following() {
             >
               <div className="flex items-center gap-4">
                 <FiSearch className="text-xl text-gray-500" />
-                <span className="text-lg text-blue-700 font-medium">{query}</span>
+                <span className="text-lg text-blue-700 font-medium">
+                  {query}
+                </span>
               </div>
 
               <button

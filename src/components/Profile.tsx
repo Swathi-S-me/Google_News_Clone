@@ -15,7 +15,7 @@ const Profile = (props: profileProp) => {
       await signOut(auth);
      toast.success("Logged out successfully");
       props.setProfile(false);
-      localStorage.clear()
+      localStorage.removeItem("currentUser");
       navigate({ to: "/" });
     } catch (err) {
       console.error(err);

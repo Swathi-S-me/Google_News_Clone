@@ -52,7 +52,7 @@ export default function NavbarIcons({ selectedLang, onLangChange }: changelangPr
         )}
       </div>
 
-      {/* Profile / Sign in */}
+      {/*  Sign in */}
       {currentUser ? (
         <img
           src={currentUser.photoURL || user}
@@ -69,7 +69,7 @@ export default function NavbarIcons({ selectedLang, onLangChange }: changelangPr
         </button>
       )}
 
-      {/* Language Modal */}
+      {/* Language */}
       {showLanguageDropdown && (
         <LanguageSelector
           isOpen={showLanguageDropdown}
@@ -82,7 +82,7 @@ export default function NavbarIcons({ selectedLang, onLangChange }: changelangPr
         />
       )}
 
-      {/* Profile Component */}
+      
       {profile && <Profile setProfile={setProfile} />}
     </div>
   );

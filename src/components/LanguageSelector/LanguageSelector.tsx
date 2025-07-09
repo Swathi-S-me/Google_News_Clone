@@ -21,7 +21,7 @@ export default function LanguageSelector({
   const [tempSelected, setTempSelected] = useState(selected);
 
   useEffect(() => {
-    setTempSelected(selected); // Sync when modal opens
+    setTempSelected(selected); 
   }, [selected, isOpen]);
 
   const filtered = languages.filter((l) =>

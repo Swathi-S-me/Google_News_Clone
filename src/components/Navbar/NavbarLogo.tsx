@@ -1,4 +1,3 @@
-// import google from "../assets/images.png";
 import google from "../../assets/Google_2015_logo.svg.webp";
 
 export default function NavbarLogo() {
