@@ -1,15 +1,14 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import type { menuProp } from "../../types/types";
+import * as S from "../../styles/sharedStyles";
 
-
-function Menubar(props: menuProp) {
-  const navigate = useNavigate(); 
+function Menubar({ setMenu }: menuProp) {
+  const navigate = useNavigate();
 
   const items = [
     "Home",
     "For you",
     "Following",
-    
     "India",
     "Local",
     "World",
@@ -22,23 +21,27 @@ function Menubar(props: menuProp) {
   ];
 
   return (
-    <div className="bg-white shadow px-4 py-2 text-gray-500 overflow-x-auto">
-      <div className="flex justify-center gap-10 whitespace-nowrap">
+    <div
+      className={`${S.bgWhite} ${S.shadow} ${S.px4} ${S.py2} ${S.textGray500} ${S.overflowXAuto}`}
+    >
+      <div
+        className={`${S.flex} ${S.justifyCenter} ${S.gap10} ${S.whitespaceNoWrap}`}
+      >
         {items.map((item) =>
           item === "Following" ? (
             <Link
               key={item}
               to="/following"
-              className="hover:text-black cursor-pointer"
+              className={`${S.hoverTextBlack} ${S.cursorPointer}`}
             >
               {item}
             </Link>
           ) : (
             <h1
               key={item}
-              className="hover:text-black cursor-pointer"
+              className={`${S.hoverTextBlack} ${S.cursorPointer}`}
               onClick={() => {
-                props.setMenu(item);
+                setMenu(item);
                 navigate({ to: "/" });
               }}
             >
@@ -50,4 +53,5 @@ function Menubar(props: menuProp) {
     </div>
   );
 }
+
 export default Menubar;

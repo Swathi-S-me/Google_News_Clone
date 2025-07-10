@@ -12,7 +12,7 @@ export interface NewsProps {
   loading?: boolean;
 }
 export type profileProp = {
-  // setProfile: any;
+  
   setProfile: React.Dispatch<React.SetStateAction<boolean>>;
 };
 export type menuProp = {
@@ -39,4 +39,16 @@ export interface NavbarProps {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
   selectedLang: string;
   onLangChange: (lang: string) => void;
+}
+export interface WeatherInfo {
+  name: string;
+  main: {
+    temp: number;
+    temp_min: number;
+    temp_max: number;
+  };
+  weather: {
+    main: string;
+    icon: string;
+  }[];
 }

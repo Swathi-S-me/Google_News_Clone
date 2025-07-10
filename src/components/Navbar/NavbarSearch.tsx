@@ -1,8 +1,15 @@
 import search from "../../assets/search.png";
+import * as S from "../../styles/sharedStyles";
 
-export default function NavbarSearch({ setSearch }: { setSearch: (val: string) => void }) {
+export default function NavbarSearch({
+  setSearch,
+}: {
+  setSearch: (val: string) => void;
+}) {
   return (
-    <div className="flex items-center bg-gray-100 rounded-lg px-3 py-2 w-full max-w-xl">
+    <div
+      className={`${S.flex} ${S.itemsCenter} ${S.bgGray100} ${S.roundedLg} ${S.px3} ${S.py2} ${S.wFull} ${S.maxWXL}`}
+    >
       <img src={search} alt="search" className="w-4 h-4" />
       <input
         onChange={(e) => setSearch(e.target.value)}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getSavedSearches, removeSavedSearch } from "../../utils/saveUtils";
 import { FiSearch, FiTrash2 } from "react-icons/fi";
+import * as S from "../../styles/sharedStyles";
 
 function Following() {
   const [savedSearches, setSavedSearches] = useState(getSavedSearches());
@@ -11,33 +12,39 @@ function Following() {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800"> Searches</h1>
+    <div className={`${S.p6} ${S.maxW4xl} ${S.mxAuto}`}>
+      <h1 className={`${S.text3xl} ${S.fontBold} ${S.mb6} ${S.textGray800}`}>
+        Searches
+      </h1>
 
       {savedSearches.length === 0 ? (
-        <div className="text-gray-500 text-center text-lg py-8 bg-white rounded-lg shadow-inner">
+        <div
+          className={`${S.textGray500} ${S.textCenter} ${S.textLg} ${S.py8} ${S.bgWhite} ${S.roundedLg} ${S.shadowInner}`}
+        >
           You haven't saved any searches yet.
         </div>
       ) : (
-        <div className="grid gap-4">
+        <div className={`${S.grid} ${S.gap4}`}>
           {savedSearches.map((query, index) => (
             <div
               key={index}
-              className="flex items-center justify-between px-5 py-4 bg-white rounded-xl shadow-md hover:shadow-lg transition"
+              className={`${S.flex} ${S.itemsCenter} ${S.justifyBetween} ${S.px5} ${S.py4} ${S.bgWhite} ${S.roundedXl} ${S.shadowMd} ${S.hoverShadowLg} ${S.transition}`}
             >
-              <div className="flex items-center gap-4">
-                <FiSearch className="text-xl text-gray-500" />
-                <span className="text-lg text-blue-700 font-medium">
+              <div className={`${S.flex} ${S.itemsCenter} ${S.gap4}`}>
+                <FiSearch className={`${S.textXl} ${S.textGray500}`} />
+                <span
+                  className={`${S.textLg} ${S.textBlue700} ${S.fontMedium}`}
+                >
                   {query}
                 </span>
               </div>
 
               <button
                 onClick={() => handleDelete(query)}
-                className="p-2 text-red-500 hover:text-red-700 rounded-full transition cursor-pointer"
+                className={`${S.p2} ${S.textRed500} ${S.hoverTextRed700} ${S.roundedFull} ${S.transition} ${S.cursorPointer}`}
                 title="Delete search"
               >
-                <FiTrash2 className="text-xl" />
+                <FiTrash2 className={S.textXl} />
               </button>
             </div>
           ))}

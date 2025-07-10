@@ -2,10 +2,11 @@ import { auth } from "../firebase/firebase";
 import user from "../assets/user.png";
 import out from "../assets/logout.png";
 import { signOut } from "firebase/auth";
-import { useNavigate } from "@tanstack/react-router"; 
+import { useNavigate } from "@tanstack/react-router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import type {profileProp} from "../types/types"
+import type { profileProp } from "../types/types";
+import * as S from "../styles/sharedStyles";
 
 const Profile = (props: profileProp) => {
   const navigate = useNavigate();
@@ -13,68 +14,66 @@ const Profile = (props: profileProp) => {
   const logout = async () => {
     try {
       await signOut(auth);
-     toast.success("Logged out successfully");
+      toast.success("Logged out successfully");
       props.setProfile(false);
       localStorage.removeItem("currentUser");
       navigate({ to: "/" });
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      const error: any = err;
-      toast.error(error.message || "Logout failed");
+      toast.error(err.message || "Logout failed");
     }
   };
 
   return (
     <>
       <ToastContainer autoClose={3000} />
-      <div
-        className="relative z-10"
-        aria-labelledby="modal-title"
-        role="dialog"
-        aria-modal="true"
-      >
-        <div className="fixed inset-0 "></div>
+      <div className="relative z-10" role="dialog" aria-modal="true">
+        <div className="fixed inset-0"></div>
 
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-          <div className="flex min-h-full items-end justify-end p-4 text-center sm:items-start mt-8 mr-5 sm:p-0">
-            <div className="relative transform overflow-hidden rounded-3xl bg-slate-200 text-left shadow-xl transition-all sm:my-8 sm:w-5/12 sm:h-80 sm:max-w-md">
-              <div className="bg-slate-200 px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left flex flex-col justify-center items-center">
-                  <div className="flex items-center">
+          <div
+            className={`flex min-h-full items-end justify-end ${S.p4} ${S.textCenter} sm:items-start ${S.mt8} ${S.mr5} ${S.smP0}`}
+          >
+            <div
+              className={`relative transform overflow-hidden ${S.rounded3xl} ${S.bgSlate200} text-left shadow-xl transition-all ${S.smMy8} ${S.smW5_12} ${S.smH80} ${S.smMaxWmd}`}
+            >
+              <div
+                className={`${S.bgSlate200} ${S.px4} ${S.pb4} ${S.pt5} ${S.smP6} ${S.smPb4}`}
+              >
+                <div
+                  className={`mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left ${S.flex} ${S.flexCol} ${S.justifyCenter} ${S.itemsCenter}`}
+                >
+                  <div className={`${S.flex} ${S.itemsCenter}`}>
                     <h3
-                      className="text-base font-semibold leading-6 text-gray-900"
-                      id="modal-title"
+                      className={`${S.textBase} ${S.fontSemibold} ${S.leading6} ${S.textGray900}`}
                     >
                       {auth?.currentUser?.email}
                     </h3>
                     <h1
                       onClick={() => props?.setProfile(false)}
-                      className="ml-5 cursor-pointer"
+                      className={`${S.ml5} ${S.cursorPointer}`}
                     >
                       X
                     </h1>
                   </div>
 
                   <img
-                    src={
-                      auth?.currentUser?.photoURL
-                        ? auth?.currentUser?.photoURL
-                        : user
-                    }
-                    className="w-20 h-20 rounded-full mt-6"
+                    src={auth?.currentUser?.photoURL || user}
+                    className={`${S.w20} ${S.h20} ${S.roundedFull} ${S.mt6}`}
+                    alt="user avatar"
                   />
-                  <h1 className="text-2xl">
+                  <h1 className={S.text2xl}>
                     Hi, {auth?.currentUser?.displayName}!
                   </h1>
                   <div
                     onClick={logout}
-                    className="cursor-pointer flex items-center rounded-3xl bg-white p-3 w-60 mt-7"
+                    className={`${S.cursorPointer} ${S.flex} ${S.itemsCenter} ${S.rounded3xl} ${S.bgWhite} ${S.p3} ${S.w60} ${S.mt7}`}
                   >
-                    <img src={out} className="w-5 h-5 ml-16" />
-                    <h1 className="ml-4">Signout</h1>
+                    <img src={out} className={`${S.w5} ${S.h5} ${S.ml16}`} />
+                    <h1 className={S.ml3}>Signout</h1>
                   </div>
 
-                  <h1 className="text-xs mt-6">
+                  <h1 className={`${S.textXs} ${S.mt6}`}>
                     Privacy Policy : Terms of Service
                   </h1>
                 </div>
