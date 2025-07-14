@@ -1,6 +1,3 @@
-// src/styles/sharedStyles.ts
-
-// Layout
 export const flex = "flex";
 export const flexCol = "flex-col";
 export const justifyBetween = "justify-between";
@@ -20,7 +17,7 @@ export const hScreen = "h-screen";
 
 export const minHScreen = "min-h-screen";
 export const spaceX2Flex = "flex justify-end space-x-2";
-// Spacing
+
 export const p2 = "p-2";
 export const p4 = "p-4";
 export const p5 = "p-5";
@@ -70,7 +67,7 @@ export const w10_12 = "w-10/12";
 export const mt2 = "mt-2";
 export const gridCols3 = "col-span-3";
 
-// Position & Display
+
 export const relative = "relative";
 export const absolute = "absolute";
 export const right0 = "right-0";
@@ -79,7 +76,7 @@ export const overflowXAuto = "overflow-x-auto";
 export const whitespaceNoWrap = "whitespace-nowrap";
 export const overflowYAuto = "overflow-y-auto";
 
-// Box
+
 export const bgWhite = "bg-white";
 export const bgGray100 = "bg-gray-100";
 export const bgBlue500 = "bg-blue-500";
@@ -94,7 +91,7 @@ export const border = "border";
 export const objectCover = "objectCover";
 export const hoverBgGray100 = "hover:bg-gray-100";
 
-// Text
+
 export const textXl = "textXl";
 export const textItalic = "italic";
 export const text2xl = "text-2xl";
@@ -122,7 +119,7 @@ export const backdropBlurSm = "backdrop-blur-sm";
 export const bgBlack50 = "bg-black/50";
 export const uppercase = "uppercase";
 
-// UI
+
 export const cursorPointer = "cursor-pointer";
 export const hoverShadow = "hover:shadow";
 export const hoverShadowLg = "hover:shadow-lg";
