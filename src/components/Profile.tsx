@@ -57,11 +57,18 @@ const Profile = (props: profileProp) => {
                     </h1>
                   </div>
 
-                  <img
+                  {/* <img
                     src={auth?.currentUser?.photoURL || user}
                     className={`${S.w20} ${S.h20} ${S.roundedFull} ${S.mt6}`}
                     alt="user avatar"
+                  /> */}
+                  <img
+                    src={auth?.currentUser?.photoURL || user}
+                    onError={(e) => (e.currentTarget.src = user)}
+                    className={`${S.w20} ${S.h20} ${S.roundedFull} ${S.mt6}`}
+                    alt="user avatar"
                   />
+
                   <h1 className={S.text2xl}>
                     Hi, {auth?.currentUser?.displayName}!
                   </h1>

@@ -21,13 +21,27 @@ export default function LanguageSelector({
   const [search, setSearch] = useState("");
   const [tempSelected, setTempSelected] = useState(selected);
 
-  useEffect(() => {
-    setTempSelected(selected);
-  }, [selected, isOpen]);
+  // useEffect(() => {
+  //   setTempSelected(selected);
+  // }, [selected, isOpen]);
 
   const filtered = languages.filter((l) =>
     l.name.toLowerCase().includes(search.toLowerCase())
   );
+  useEffect(() => {
+  
+  const savedLang = localStorage.getItem("lang") || "en";
+  if (savedLang && isOpen) {
+    setTempSelected(savedLang);
+  }
+}, [isOpen]);
+
+
+const handleUpdate = () => {
+  localStorage.setItem("lang", tempSelected);
+  onSelect(tempSelected);
+  onClose();
+};
 
   if (!isOpen) return null;
 
@@ -87,7 +101,7 @@ export default function LanguageSelector({
           >
             Cancel
           </button>
-          <button
+          {/* <button
             onClick={() => {
               onSelect(tempSelected);
               onClose();
@@ -95,7 +109,15 @@ export default function LanguageSelector({
             className={`${S.px4} ${S.py2} ${S.bgBlue500} ${S.textWhite} ${S.rounded} ${S.cursorPointer}`}
           >
             Update
-          </button>
+          </button> */}
+          <button
+  onClick={handleUpdate}
+  className={`${S.px4} ${S.py2} ${S.bgBlue500} ${S.textWhite} ${S.rounded} ${S.cursorPointer}`}
+>
+  Update
+</button>
+
+
         </div>
       </div>
     </div>
