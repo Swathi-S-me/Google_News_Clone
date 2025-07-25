@@ -125,7 +125,7 @@ function News({
 
       {!loading && !isLoggedIn && (
         <button
-          className={`${S.textSm} ${S.textBlue600} ${S.mt3} ${S.underline} hover:${S.textBlue600} ${S.block} ${S.mxAuto}`}
+          className={`${S.textSm} ${S.textBlue600} ${S.mt3} ${S.underline} hover:${S.textBlue600} ${S.block} ${S.mxAuto} cursor-pointer`}
           onClick={googlesignin}
         >
           Login to see more news and personalized recommendations.

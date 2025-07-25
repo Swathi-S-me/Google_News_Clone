@@ -66,7 +66,7 @@ export async function searchNews(topic: string, language: string) {
   return data.articles; 
 }
 
-// hooks
+
 export const useTopHeadlines = (language: string) => {
   return useQuery({
     queryKey: ["topHeadlines", language],
