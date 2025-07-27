@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { FaSearch } from "react-icons/fa";
 import type { LanguageOption, langProps } from "../../types/types";
 import * as S from "../../styles/sharedStyles";
@@ -21,38 +21,40 @@ export default function LanguageSelector({
   const [search, setSearch] = useState("");
   const [tempSelected, setTempSelected] = useState(selected);
 
-  // useEffect(() => {
-  //   setTempSelected(selected);
-  // }, [selected, isOpen]);
-
-  const filtered = languages.filter((l) =>
-    l.name.toLowerCase().includes(search.toLowerCase())
-  );
   useEffect(() => {
-  
-  const savedLang = localStorage.getItem("lang") || "en";
-  if (savedLang && isOpen) {
-    setTempSelected(savedLang);
-  }
-}, [isOpen]);
+    setTempSelected(selected);
+  }, [selected, isOpen]);
 
+  const filtered = useMemo(
+    () =>
+      languages.filter((l) =>
+        l.name.toLowerCase().includes(search.toLowerCase())
+      ),
+    [search]
+  );
 
-const handleUpdate = () => {
-  localStorage.setItem("lang", tempSelected);
-  onSelect(tempSelected);
-  onClose();
-};
+  const handleUpdate = () => {
+    localStorage.setItem("lang", tempSelected);
+    onSelect(tempSelected);
+    onClose();
+  };
 
   if (!isOpen) return null;
 
   return (
     <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="language-selector-title"
       className={`${S.fixed} ${S.inset0} ${S.z50} ${S.backdropBlurSm} ${S.bgBlack50} ${S.flex} ${S.itemsCenter} ${S.justifyCenter}`}
     >
       <div
         className={`${S.bgWhite} ${S.rounded} ${S.p6} ${S.wFull} ${S.maxWmd} ${S.maxH90vh} ${S.overflowYAuto}`}
       >
-        <h2 className={`${S.textXl} ${S.fontSemibold} ${S.mb4}`}>
+        <h2
+          id="language-selector-title"
+          className={`${S.textXl} ${S.fontSemibold} ${S.mb4}`}
+        >
           Language and region of interest
         </h2>
 
@@ -60,10 +62,15 @@ const handleUpdate = () => {
         <div
           className={`${S.flex} ${S.itemsCenter} ${S.bgGray100} ${S.px3} ${S.py2} ${S.rounded} ${S.mb4}`}
         >
-          <FaSearch className={S.textGray500} />
+          <FaSearch
+            className={S.textGray500}
+            aria-hidden="true"
+            focusable="false"
+          />
           <input
             type="text"
             placeholder="Search for language or region"
+            aria-label="Search languages"
             className="bg-gray-100 outline-none ml-2 w-full"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -77,7 +84,7 @@ const handleUpdate = () => {
           >
             Suggested
           </h3>
-          {[...filtered.slice(0, 2), ...filtered.slice(2)].map((lang) => (
+          {filtered.map((lang) => (
             <label
               key={lang.code}
               className={`${S.flex} ${S.itemsCenter} ${S.spaceX2} ${S.py2} ${S.px2} ${S.rounded} ${S.hoverBgGray100} ${S.cursorPointer}`}
@@ -101,23 +108,12 @@ const handleUpdate = () => {
           >
             Cancel
           </button>
-          {/* <button
-            onClick={() => {
-              onSelect(tempSelected);
-              onClose();
-            }}
+          <button
+            onClick={handleUpdate}
             className={`${S.px4} ${S.py2} ${S.bgBlue500} ${S.textWhite} ${S.rounded} ${S.cursorPointer}`}
           >
             Update
-          </button> */}
-          <button
-  onClick={handleUpdate}
-  className={`${S.px4} ${S.py2} ${S.bgBlue500} ${S.textWhite} ${S.rounded} ${S.cursorPointer}`}
->
-  Update
-</button>
-
-
+          </button>
         </div>
       </div>
     </div>

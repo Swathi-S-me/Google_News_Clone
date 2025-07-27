@@ -6,15 +6,21 @@ googleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
-export const googlesignin = async () => {
+export const googleSignIn = async (): Promise<void> => {
   try {
-    await signInWithPopup(auth, googleProvider);
-    if (auth.currentUser?.email) {
+    const result = await signInWithPopup(auth, googleProvider);
+    const user = result.user;
+
+    if (user?.email) {
+      localStorage.setItem("currentUser", user.email);
       toast.success("Logged in successfully");
-      localStorage.setItem("currentUser", auth.currentUser.email);
+    } else {
+      toast.warning("No user information found.");
     }
-  } catch (err: any) {
-    console.error(err);
-    toast.error(err.message || "Login failed");
+  } catch (error: unknown) {
+    const errorMessage =
+      error instanceof Error ? error.message : "An unexpected error occurred";
+    console.error("Google Sign-In Error:", error);
+    toast.error(errorMessage);
   }
 };

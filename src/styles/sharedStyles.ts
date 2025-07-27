@@ -173,3 +173,7 @@ export const textBlue700 = "text-blue-700";
 
 export const textRed500 = "text-red-500";
 export const hoverTextRed700 = "hover:text-red-700";
+
+
+export const bgTransparent = "bg-transparent";
+export const borderNone = "border-none";;

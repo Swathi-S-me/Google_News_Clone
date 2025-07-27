@@ -8,8 +8,12 @@ export default function WeatherCard({ weather }: { weather: WeatherInfo }) {
     >
       <img
         src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
-        alt="weather icon"
-        className={`${S.w12} ${S.h12}`}
+        alt={weather.weather[0].description || "Weather icon"}
+        width={48}
+        height={48}
+        className={`${S.w12} ${S.h12} shrink-0`}
+        decoding="async"
+        fetchPriority="high"
       />
       <div className={S.ml3}>
         <h2 className={`${S.textXl} ${S.fontSemibold}`}>{weather.name}</h2>

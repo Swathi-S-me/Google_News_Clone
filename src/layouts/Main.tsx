@@ -11,19 +11,17 @@ import * as S from "../styles/sharedStyles";
 export default function Main() {
   const [search, setSearch] = useState("");
   const [menu, setMenu] = useState("Home");
-  const [language, setLanguage] = useState("en");
+
+  const [language, setLanguage] = useState(() => {
+    return localStorage.getItem("lang") || "en";
+  });
 
   const { location } = useRouterState();
   const pathname = location.pathname;
-  const active = pathname === "/";
+  const isHomePage = pathname === "/";
 
-  const { news, loading } = useNewsFetch(search, menu, language, active);
+  const { news, loading } = useNewsFetch(search, menu, language, isHomePage);
   const date = new Date();
-
-  useEffect(() => {
-    const savedLang = localStorage.getItem("lang");
-    if (savedLang) setLanguage(savedLang);
-  }, []);
 
   useEffect(() => {
     localStorage.setItem("lang", language);
@@ -40,7 +38,7 @@ export default function Main() {
       <Menubar setMenu={setMenu} />
 
       <div className={`${S.pt5} ${S.px4}`}>
-        {pathname === "/" && (
+        {isHomePage ? (
           <>
             <div
               className={`${S.flex} ${S.justifyBetween} ${S.itemsStart} ${S.px4}`}
@@ -59,9 +57,9 @@ export default function Main() {
             <Home news={news} />
             <News news={news} search={search} loading={loading} />
           </>
+        ) : (
+          <Outlet />
         )}
-
-        {pathname !== "/" && <Outlet />}
       </div>
     </div>
   );

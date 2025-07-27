@@ -5,7 +5,8 @@ export default function NotFound() {
   const navigate = useNavigate();
 
   return (
-    <div
+    <main
+      role="alert"
       className={`${S.hScreen} ${S.flex} ${S.flexCol} ${S.itemsCenter} ${S.justifyCenter} ${S.bgGray100} ${S.textCenter} ${S.p6}`}
     >
       <h1 className={`${S.text5xl} ${S.fontBold} ${S.textRed600} ${S.mb4}`}>
@@ -19,11 +20,14 @@ export default function NotFound() {
       </p>
 
       <button
+        type="button"
+        aria-label="Go back to homepage"
+        title="Return to Home"
         onClick={() => navigate({ to: "/" })}
-        className={`${S.bgBlue600} ${S.textWhite} ${S.px4} ${S.py2} ${S.rounded} ${S.hoverBgBlue700} ${S.transition} ${S.cursorPointer}`}
+        className={`${S.bgBlue600} ${S.textWhite} ${S.px4} ${S.py2} ${S.rounded} ${S.hoverBgBlue700} ${S.transition} ${S.cursorPointer} focus:outline-none focus:ring focus:ring-blue-300`}
       >
         Go to Home
       </button>
-    </div>
+    </main>
   );
 }

@@ -5,7 +5,7 @@ import * as S from "../../styles/sharedStyles";
 function Menubar({ setMenu }: menuProp) {
   const navigate = useNavigate();
 
-  const items = [
+  const items: string[] = [
     "Home",
     "For you",
     "Following",
@@ -21,7 +21,9 @@ function Menubar({ setMenu }: menuProp) {
   ];
 
   return (
-    <div
+    <nav
+      role="navigation"
+      aria-label="Main Menu"
       className={`${S.bgWhite} ${S.shadow} ${S.px4} ${S.py2} ${S.textGray500} ${S.overflowXAuto}`}
     >
       <div
@@ -32,25 +34,30 @@ function Menubar({ setMenu }: menuProp) {
             <Link
               key={item}
               to="/following"
+              aria-current={
+                location.pathname === "/following" ? "page" : undefined
+              }
               className={`${S.hoverTextBlack} ${S.cursorPointer}`}
             >
               {item}
             </Link>
           ) : (
-            <h1
+            <button
               key={item}
-              className={`${S.hoverTextBlack} ${S.cursorPointer}`}
+              type="button"
+              aria-label={`Go to ${item} news`}
               onClick={() => {
                 setMenu(item);
                 navigate({ to: "/" });
               }}
+              className={`${S.hoverTextBlack} ${S.cursorPointer} ${S.bgTransparent} ${S.borderNone}`}
             >
               {item}
-            </h1>
+            </button>
           )
         )}
       </div>
-    </div>
+    </nav>
   );
 }
 

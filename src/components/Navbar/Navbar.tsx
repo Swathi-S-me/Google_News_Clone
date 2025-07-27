@@ -13,14 +13,16 @@ export default function Navbar({
 }: NavbarProps) {
   return (
     <>
-      <ToastContainer autoClose={3000} />
-      <div
+      <ToastContainer autoClose={3000} limit={1} pauseOnFocusLoss={false} />
+
+      <header
         className={`${S.flex} ${S.justifyBetween} ${S.itemsCenter} ${S.bgWhite} ${S.shadow} ${S.px6} ${S.py3} ${S.relative}`}
+        role="banner"
       >
         <NavbarLogo />
         <NavbarSearch setSearch={setSearch} />
         <NavbarIcons selectedLang={selectedLang} onLangChange={onLangChange} />
-      </div>
+      </header>
     </>
   );
 }

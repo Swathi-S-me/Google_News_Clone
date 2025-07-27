@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import type { NewsProps } from "../../types/types";
 import { auth } from "../../firebase/firebase";
-import { googlesignin } from "../../utils/authUtils";
+import { googleSignIn } from "../../utils/authUtils";
 import { SiGooglenews } from "react-icons/si";
 import { saveSearchQuery, getSavedSearches } from "../../utils/saveUtils";
 import * as S from "../../styles/sharedStyles";
@@ -60,8 +60,10 @@ function News({
 
   return (
     <div className={`${S.wScreen} ${S.bgGray100} ${S.minHScreen} ${S.pt4}`}>
-      <div
+      <main
         className={`${S.bgWhite} ${S.w10_12} ${S.mxAuto} ${S.p6} ${S.roundedLg} ${S.shadow} ${S.grid} ${S.gridCols1} ${S.mdGridCols2} lg:grid-cols-3 ${S.gap5}`}
+        role="main"
+        aria-label="News content"
       >
         {loading ? (
           <h1
@@ -75,6 +77,7 @@ function News({
           >
             <SiGooglenews
               className={`${S.w20} ${S.h20} ${S.mb4} ${S.opacity60}`}
+              aria-hidden="true"
             />
             <h2
               className={`${S.textGray600} ${S.textLg} ${S.fontMedium} ${S.mb2}`}
@@ -86,47 +89,57 @@ function News({
             </p>
           </div>
         ) : (
-          displayNews.map((data, index) => (
-            <a
-              key={index}
-              href={data.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${S.block} ${S.hoverShadowMd} ${S.transition} ${S.roundedLg} ${S.overflowHidden} ${S.bgWhite}`}
-              aria-label={`Open article: ${data.title}`}
-            >
-              <div
-                className={`${S.p4} ${S.flex} ${S.flexCol} ${S.justifyBetween} h-full`}
+          displayNews.map((data) => {
+            const title = data.title || "Untitled article";
+            const source = data.source?.name || "Unknown Source";
+
+            return (
+              <a
+                key={data.url}
+                href={data.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${S.block} ${S.hoverShadowMd} ${S.transition} ${S.roundedLg} ${S.overflowHidden} ${S.bgWhite}`}
+                aria-label={`Read article titled ${title}`}
               >
-                <div className={`${S.flex} ${S.flexCol} ${S.gap2}`}>
-                  <h1
-                    className={`${S.textSm} ${S.textBlue600} ${S.fontSemibold} ${S.uppercase}`}
-                  >
-                    {data.source?.name || "Unknown Source"}
-                  </h1>
-                  <h2
-                    className={`${S.textLg} ${S.fontBold} ${S.textGray800} hover:underline`}
-                  >
-                    {data.title || "No title available"}
-                  </h2>
-                </div>
-                {data.urlToImage && (
-                  <img
-                    src={data.urlToImage}
-                    alt={data.title || "News image"}
-                    className={`${S.wFull} ${S.h40} ${S.objectCover} ${S.mt3} ${S.roundedMd}`}
-                  />
-                )}
-              </div>
-            </a>
-          ))
+                <article
+                  className={`${S.p4} ${S.flex} ${S.flexCol} ${S.justifyBetween} h-full`}
+                >
+                  <header className={`${S.flex} ${S.flexCol} ${S.gap2}`}>
+                    <h1
+                      className={`${S.textSm} ${S.textBlue600} ${S.fontSemibold} ${S.uppercase}`}
+                    >
+                      {source}
+                    </h1>
+                    <h2
+                      className={`${S.textLg} ${S.fontBold} ${S.textGray800} hover:underline`}
+                    >
+                      {title}
+                    </h2>
+                  </header>
+
+                  {data.urlToImage && (
+                    <img
+                      src={data.urlToImage}
+                      alt={title}
+                      loading="lazy"
+                      width="100%"
+                      height="auto"
+                      className={`${S.wFull} ${S.h40} ${S.objectCover} ${S.mt3} ${S.roundedMd}`}
+                    />
+                  )}
+                </article>
+              </a>
+            );
+          })
         )}
-      </div>
+      </main>
 
       {!loading && !isLoggedIn && (
         <button
           className={`${S.textSm} ${S.textBlue600} ${S.mt3} ${S.underline} hover:${S.textBlue600} ${S.block} ${S.mxAuto} cursor-pointer`}
-          onClick={googlesignin}
+          onClick={googleSignIn}
+          aria-label="Login with Google to view more news"
         >
           Login to see more news and personalized recommendations.
         </button>

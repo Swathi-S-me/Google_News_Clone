@@ -6,7 +6,10 @@ export default function NavbarLogo() {
     <div className={`${S.flex} ${S.itemsCenter} ${S.gap2}`}>
       <img
         src={google}
-        alt="Google"
+        alt="Google News Logo"
+        width={80}
+        height={60}
+        loading="lazy"
         className={`${S.w20} ${S.h15} object-contain align-middle`}
       />
       <h1 className={`${S.text2xl} ${S.fontSemibold} ${S.textGray700}`}>

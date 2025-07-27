@@ -48,6 +48,7 @@ export interface WeatherInfo {
     temp_max: number;
   };
   weather: {
+    description: string;
     main: string;
     icon: string;
   }[];
