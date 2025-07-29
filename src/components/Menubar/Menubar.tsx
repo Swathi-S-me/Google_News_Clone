@@ -2,7 +2,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import type { menuProp } from "../../types/types";
 import * as S from "../../styles/sharedStyles";
 
-function Menubar({ setMenu }: menuProp) {
+function Menubar({ menu,setMenu }: menuProp) {
   const navigate = useNavigate();
 
   const items: string[] = [
@@ -34,10 +34,13 @@ function Menubar({ setMenu }: menuProp) {
             <Link
               key={item}
               to="/following"
+              onClick={() => setMenu("Following")}
               aria-current={
-                location.pathname === "/following" ? "page" : undefined
+                menu === "Following" ? "page" : undefined
               }
-              className={`${S.hoverTextBlack} ${S.cursorPointer}`}
+              className={`${S.hoverTextBlack} ${S.cursorPointer} ${
+                menu === "Following" ? S.activeMenu : ""
+              }`}
             >
               {item}
             </Link>
@@ -50,7 +53,9 @@ function Menubar({ setMenu }: menuProp) {
                 setMenu(item);
                 navigate({ to: "/" });
               }}
-              className={`${S.hoverTextBlack} ${S.cursorPointer} ${S.bgTransparent} ${S.borderNone}`}
+              className={`${S.hoverTextBlack} ${S.cursorPointer} ${S.bgTransparent} ${S.borderNone} 
+              ${menu === item ? S.activeMenu : "" 
+              }`}
             >
               {item}
             </button>

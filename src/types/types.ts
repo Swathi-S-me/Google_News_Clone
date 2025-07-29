@@ -15,7 +15,9 @@ export type profileProp = {
   
   setProfile: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
 export type menuProp = {
+   menu: string;
   setMenu: React.Dispatch<React.SetStateAction<string>>;
 };
 

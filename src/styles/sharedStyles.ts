@@ -176,4 +176,5 @@ export const hoverTextRed700 = "hover:text-red-700";
 
 
 export const bgTransparent = "bg-transparent";
-export const borderNone = "border-none";;
+export const borderNone = "border-none";
+export const activeMenu = "text-black font-bold ";

@@ -35,7 +35,7 @@ export default function Main() {
         onLangChange={setLanguage}
       />
 
-      <Menubar setMenu={setMenu} />
+      <Menubar  menu={menu} setMenu={setMenu} />
 
       <div className={`${S.pt5} ${S.px4}`}>
         {isHomePage ? (
